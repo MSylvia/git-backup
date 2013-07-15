@@ -1,6 +1,6 @@
 #!/usr/bin/ruby
 # == Synopsis 
-#    Backup all of your git repositories
+#    Update all of your git mirror repositories
 # 
 # == Usage
 #    1) clone your repositories into one location (baseDir) on some server
@@ -23,7 +23,7 @@ require 'date'
 
 def run
   start = Time.now
-  
+  num = 0
   ignore =  Array.new
   ignore = [
     ".",
@@ -31,11 +31,11 @@ def run
   ]
   
   ignoreFlag = false
-  baseDir = "/home/myuser/mybackups/"
+  baseDir = "/media/backup/repositories/"
 
   print "Updating repositories...\n\n"
   Dir.foreach(baseDir) do |entry|
-    
+    num += 1
     if File::directory?(baseDir+entry)
     
       #ignore directories specified up top
@@ -52,14 +52,15 @@ def run
       
       #if we make it here, pull latest
       Dir.chdir(baseDir+entry)
-      `git pull -v`
-      print "\n\n"
+      print "Getting updates from repository #{entry}."
+      `git remote update`
+      print "\n"
       Dir.chdir(baseDir)
 
     end
  end
 
- print "\nCompleted in #{(Time.now-start).round} seconds\n\n"
+ print "\nCompleted #{num} repositories in #{(Time.now-start).round} seconds\n\n"
 
 end
 
