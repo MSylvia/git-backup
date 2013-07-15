@@ -12,14 +12,14 @@ Creare a directory for your backup repositories
 
     mkdir /home/myuser/mybackups
     
-Modify `baseRepoDir` and `baseBackupDir` to match the full path to the directory you used in step 1
+Modify `baseRepoDir` and `baseBackupDir` to match the full path to the directory
 
 Run `./mirror.rb` to create your mirrors
 
 Backup
 -----
 
-Modify `baseDir` to match the full path to the directory you used in step 1
+Modify `baseDir` to match the full path to the directory
 
 Run `./backup.rb`
 
